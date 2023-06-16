@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/spaceicon.png') }}" type="image/x-icon"/>
+    <title>PeTaker</title>
+</head>
+<body>
+    <div class="header">
+        <h1><img class="headericon" src="/static/images/spaceicon.png" alt="icon"> PeTaker <div class="hversion">Alpha</div></h1>
+    </div>
+    <div class="information">
+        <p>&#9432; You can use Teletype to interact with your pet.</p>
+    </div>
+    <div id="interaction" class="interaction">
+        {% if data %}
+            {% if data[0]["type"] == "cat" %}
+            <img id="petimage" class="responsive" src="/static/images/cat0001.png" alt="your pet">
+            {% elif data[0]["type"] == "dog" %}
+            <img id="petimage" class="responsive" src="/static/images/dog0001.png" alt="your pet">
+            {% elif data[0]["type"] == "bird" %}
+            <img id="petimage" class="responsive" src="/static/images/bird0001.png" alt="your pet">
+            {% else %}
+            <img id="petimage" class="responsive" src="/static/images/spaceicon.png" alt="your pet">
+            {%endif%}
+        {% else %}
+            <img id="petimage" class="responsive" src="/static/images/emptyspace.png" alt="your pet">
+        {%endif%}
+        <div id="overview">
+            {% if data %}
+                <p>Name: {{data[0]["name"]}} (Level {{data[0]["stats"]["level"]}}: {{data[0]["stats"]["exp"]}} EXP)</p>
+                <p>{%for i in data[0]["status"]%}
+                    {{i|title}}: {{data[0]["status"][i]}}/100
+                {%endfor%}</p>
+            {% else %}
+                <p>Try adopting a pet today!</p>
+            {% endif %}
+        </div>
+        <div id="interaction-buttons">
+            {% if data %}
+                <button onclick="viewPet()" type="button">View</button>
+                <button onclick="feedPet()" type="button">Feed</button>
+                <button onclick="washPet()" type="button">Wash</button>
+                <button onclick="playPet()" type="button">Play</button>
+                <button onclick="petPet()" type="button">Pet</button>
+                <button onclick="logsPet()" type="button">Logs</button>
+                <button class="danger" onclick="abandonPet(this)" value="{{data[0]['name']}}" class="danger" type="button">Abandon</button>
+            {% else %}
+                <button onclick="adoptPet()" type="button">Adopt</button>
+            {% endif %}       
+        </div>
+    </div>
+    <p id="appversion">PeTaker / v1.0-a.1 / By <a href="https://github.com/Kqjy">Kqjy</a> & with the help of AI (Stable Diffusion)</p>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>

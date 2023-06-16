@@ -1,0 +1,154 @@
+html, body {
+    font-family: Helvetica, Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+	word-break: break-word;
+}
+body {
+    background-color: azure;
+}
+img {
+    pointer-events: none;
+}
+.headericon {
+    width: 40px;
+    vertical-align: bottom;
+    border-radius: 12px;
+}
+.hversion {
+    vertical-align: middle;
+    color: black;
+    background-color: aquamarine;
+    width: 50px;
+    margin: auto;
+    display: inline;
+    border-radius: 18px;
+    font-size: 12px;
+    padding: 5px;
+}
+.information {
+    width: 400px;
+    padding: 1px;
+    background-color: aquamarine;
+    border-radius: 18px;
+    margin: 10px auto;
+}
+.responsive {
+    width: 90%;
+    max-width: 400px;
+    height: auto;
+    margin: 5px;
+}
+#petimage {
+    border-radius: 8px;
+}
+#overview {
+    margin: auto;
+    max-width: 600px;
+    width: auto;
+    border: 2px solid aquamarine;
+    border-radius: 8px;
+}
+#interaction-buttons {
+    margin: 5px;
+}
+#interaction-buttons button {
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 8px;
+    border: 2px solid black;
+    width: 80px;
+    padding: 8px;
+    margin: 5px;
+}
+#interaction-buttons button:hover {
+    background-color: darkgray;
+}
+.danger {
+    color: white;
+    background-color: red;
+}
+.danger:hover {
+    background-color: darkred !important;
+}
+.headlessui {
+    padding-bottom: 10%;
+    position: relative; 
+    top:40%;
+}
+.headlessui-back {
+    top: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(8px);
+    overflow: auto;
+}
+.some-form {
+    width: 650px;
+    background-color: burlywood; 
+    padding: 10px;
+    border-radius: 12px;
+    text-align: center;
+    margin: auto;
+}
+.some-form-button {
+    font-family: inherit;
+    display: inline-block;
+    padding: 5px;
+    margin: 8px;
+    background-color: bisque;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+.some-form-input {
+    text-align: center;
+    border: 0;
+    outline: solid black 2px;
+    border-radius: 12px;
+    font-size: 16px;
+    padding: 5px 1px;
+    display: block;
+    width: 80%;
+    height: 28px;
+    margin: 4px auto 10px auto;
+}
+.some-form-select {
+    height: 34px;
+}
+#appversion {
+    font-size: 8px;
+}
+#appversion a {
+    color: #40816b;
+}
+@media (prefers-color-scheme: dark) {
+    body {  background-color: rgb(20, 35, 35);
+            color: white; }
+    .information {
+        color: black;
+    }
+    #interaction-buttons button {
+        border: 2px solid gray;
+    }
+    #appversion a {
+        color: aquamarine;
+    }
+}
+@media (max-width: 700px) {
+    .headlessui {
+        left: 0;
+        transform: none;
+    }
+    #overview {
+        width: 90%;
+    }
+    .some-form {
+        width: 90%;
+    }
+    .information {
+        width: 80%;
+    }
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/spaceicon.png') }}" type="image/x-icon"/>
+    <title>P̴̛͖͒e̴͎̼̲̼̪̝̤̣̫͓̞̞̦̤͂͐͂́̀͛̊̀̎̍̃T̴̡̛̥̗͙̗̼̟̬̙͒͛͗̂̈́ȃ̷̧̢̟͚̩̭͉͎͙̮̿͆̊͐k̷̨̥̹̠̠̝̳̻̞̯̠̉͌̓̑̈́͒̀͆̂̈́͊̽͛͘͜͝ě̵̡̡̨̹͈͚̹̫̜̖̺̭̜̲̽̆̄̅̂̌͂̉̉̾̅̾ͅȑ̴̢̼̼̺͉̯̘̤͖̻̟̈́̍̉̃̍̾̇̒̚͜͝͝</title>
+</head>
+<body>
+    <div class="header">
+        <h1><img class="headericon" src="/static/images/corrupted.png" alt="icon"> P̸̡̬̏ẻ̷̘̘T̷͖̺̓̕a̷͍̎k̶̢̺̀͆ê̶͎͛r̶͇̟͝ <div class="hversion">Alpha</div></h1>
+    </div>
+    <div class="information">
+        <p>&#9432; You can use Teletype to interact with your pet.</p>
+    </div>
+    <div id="interaction" class="interaction">
+        <img id="petimage" class="responsive" src="/static/images/corrupted.png" alt="your pet">
+        <div id="overview">
+            <p>Your pet data was unable to be retrieved and was deemed corrupted.</p>
+            <p>If you have modified your pets' data:</p>
+            <p>- Try abandoning it through Teletype App Actions - "Abandon your pet".</p>
+            <p>- Refresh this page after you have executed the action.</p>
+            <p>If you have modified the configuration encryption key:</p>
+            <p>- Reinstall this application instance.</p>
+        </div>
+        <div id="interaction-buttons">
+            <button onclick="window.location.reload();" type="button">Refresh</button>    
+        </div>
+    </div>
+    <p id="appversion">???PeTaker??? / version unknown / By <a href="https://github.com/Kqjy">Kqjy</a> & with the help of AI (Stable Diffusion)</p>
+</body>
