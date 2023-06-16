@@ -352,7 +352,7 @@ function RefreshDashboard() {
             overview.appendChild(name);
             overview.appendChild(para);
 
-            petimage.src = "/static/images/" + data[0]["type"] + "0001.png";
+            petimage.src = "/static/images/" + data[0]["type"] + data[0]["form"] + ".png";
 
             button_list = ["talk", "play", "feed", "wash", "pet", "logs", "abandon"]
             for (let op = 0; op < button_list.length; op++) {

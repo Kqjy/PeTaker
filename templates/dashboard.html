@@ -17,11 +17,11 @@
     <div id="interaction" class="interaction">
         {% if data %}
             {% if data[0]["type"] == "cat" %}
-            <img id="petimage" class="responsive" src="/static/images/cat0001.png" alt="your pet">
+            <img id="petimage" class="responsive" src="/static/images/cat{{data[0]['form']}}.png" alt="your pet">
             {% elif data[0]["type"] == "dog" %}
-            <img id="petimage" class="responsive" src="/static/images/dog0001.png" alt="your pet">
+            <img id="petimage" class="responsive" src="/static/images/dog{{data[0]['form']}}.png" alt="your pet">
             {% elif data[0]["type"] == "bird" %}
-            <img id="petimage" class="responsive" src="/static/images/bird0001.png" alt="your pet">
+            <img id="petimage" class="responsive" src="/static/images/bird{{data[0]['form']}}.png" alt="your pet">
             {% else %}
             <img id="petimage" class="responsive" src="/static/images/spaceicon.png" alt="your pet">
             {%endif%}

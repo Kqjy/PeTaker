@@ -24,6 +24,15 @@ def extract_number_range(input_text):
         return (start, end)
     return None
 
+def extract_items(input_text):
+    pattern = r"choose (.+)"
+    matches = re.search(pattern, input_text)
+    if matches:
+        items_string = matches.group(1)
+        items = [item.strip() for item in items_string.split(",")]
+        return items
+    return None
+
 class Pet():
     def __init__(self):
         pass
@@ -102,6 +111,7 @@ class Pet():
                 petsdata.put({
                     "type": type,
                     "name": name,
+                    "form": "0001",
                     "status": {
                         "hunger": str(fernet.encrypt("100".encode())),
                         "hygiene": str(fernet.encrypt("100".encode())),
@@ -252,6 +262,13 @@ class Pet():
                         return f'{fetchData[0]["name"]} chooses {num}!'
                     else:
                         return f'{fetchData[0]["name"]} is confused with the numbers.'
+                if "choose" in text:
+                    items = extract_items(text)
+                    if items:
+                        chosen = random.choice(items)
+                        return f'{fetchData[0]["name"]} chooses {chosen}!'
+                    else:
+                        return f'{fetchData[0]["name"]} has no idea what to choose.'
                 f = open('response.json')
                 resp = json.load(f)
                 reply = resp[fetchData[0]["type"]][text] 
