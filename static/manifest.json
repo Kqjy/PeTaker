@@ -1,0 +1,17 @@
+{
+    "name": "PeTaker",
+    "short_name": "PeTaker",
+    "description": "PWA PeTaker",
+    "theme_color": "transparent",
+    "background_color": "transparent",
+    "display": "standalone",
+    "orientation": "portrait",
+    "start_url": "/",
+    "icons": [
+      {
+        "src": "/static/images/spaceicon.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+}

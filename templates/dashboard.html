@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/spaceicon.png') }}" type="image/x-icon"/>
+    <link rel="manifest" href="/static/manifest.json">
     <title>PeTaker</title>
 </head>
 <body>
@@ -11,7 +12,7 @@
         <h1><img class="headericon" src="/static/images/spaceicon.png" alt="icon"> PeTaker <div class="hversion">Alpha</div></h1>
     </div>
     <div class="information">
-        <p>&#9432; You can use Teletype to interact with your pet.</p>
+        <p>&#9432; You can use <a href="https://deta.space/docs/en/use/interface#teletype-actions">Teletype</a> to interact with your pet.</p>
     </div>
     <div id="interaction" class="interaction">
         {% if data %}
@@ -26,7 +27,7 @@
             {%endif%}
         {% else %}
             <img id="petimage" class="responsive" src="/static/images/emptyspace.png" alt="your pet">
-        {%endif%}
+        {%endif%}     
         <div id="overview">
             {% if data %}
                 <p>Name: {{data[0]["name"]}} (Level {{data[0]["stats"]["level"]}}: {{data[0]["stats"]["exp"]}} EXP)</p>
@@ -39,10 +40,10 @@
         </div>
         <div id="interaction-buttons">
             {% if data %}
-                <button onclick="viewPet()" type="button">View</button>
-                <button onclick="feedPet()" type="button">Feed</button>
-                <button onclick="washPet()" type="button">Wash</button>
+                <button onclick="talkPet()" type="button">Talk</button>
                 <button onclick="playPet()" type="button">Play</button>
+                <button onclick="feedPet()" type="button">Feed</button>
+                <button onclick="washPet()" type="button">Wash</button> 
                 <button onclick="petPet()" type="button">Pet</button>
                 <button onclick="logsPet()" type="button">Logs</button>
                 <button class="danger" onclick="abandonPet(this)" value="{{data[0]['name']}}" class="danger" type="button">Abandon</button>

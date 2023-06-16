@@ -54,11 +54,89 @@ function adoptPet() {
     cancel.setAttribute("onclick","cancelform()");
     cancel.setAttribute("class","some-form-button");
     var div_panelbot = document.createElement("div");
+    div_panelbot.setAttribute("class", "some-form-buttons-div");
     div_panelbot.appendChild(cancel);
     div_panelbot.appendChild(submit);
     form.appendChild(paneltitle);
     form.appendChild(typelabel); 
     form.appendChild(type);
+    form.appendChild(namelabel);
+    form.appendChild(name);
+    form.appendChild(div_panelbot);
+    inpanel.appendChild(form);
+    panel.appendChild(inpanel);
+    panelback.appendChild(panel);
+    document.body.appendChild(panelback);
+    document.body.setAttribute("style", "overflow: hidden;");
+
+let someform = document.querySelector("#form-adopt");
+someform.addEventListener("submit", function(event){
+    event.preventDefault();
+    document.getElementById("form-button-submit").enabled = false;
+    const formData = new FormData(event.target);
+    fetch(someform.action, {
+        method: "post",
+        body: JSON.stringify(Object.fromEntries(formData))
+    }).then((response) => {
+        if (response.ok) {
+        return response.text();
+        }
+        return response.text().then((text) => {throw Error(text['error'])});
+    }).then((data) => {       
+        console.log(data) 
+        cancelform();     
+        RefreshDashboard();
+        RaiseOverview(data);
+    }).catch((error) => {
+        console.log(error)
+        cancelform();
+        RaiseOverview(error);
+    });
+    });
+}
+
+function talkPet() {
+    if (document.getElementsByClassName("headlessui")[0])
+    {
+        return
+    }
+    var panel = document.createElement("div");
+    panel.setAttribute("class","headlessui");
+    var panelback = document.createElement("div");
+    panelback.setAttribute("class","headlessui-back");
+    var inpanel = document.createElement("div");
+    inpanel.setAttribute("class","some-form")
+    var form = document.createElement("form");
+    form.method = "post";
+    form.action = "/actions/talk";
+    form.id = "form-adopt";
+    form.enctype = "application/json";
+    var paneltitle = document.createElement("h3");
+    paneltitle.textContent = "Talk to your pet";
+    paneltitle.style.textAlign = "center";
+    var name = document.createElement("input");
+    name.setAttribute("type","text");
+    name.setAttribute("name","text");
+    name.setAttribute("placeholder","I love you!");
+    name.setAttribute("maxlength", "100");
+    name.setAttribute("class","some-form-input");
+    var namelabel = document.createElement("label");
+    namelabel.textContent = "Say something to your pet";
+    var submit = document.createElement("input");
+    submit.setAttribute("type","submit");
+    submit.setAttribute("value","Confirm");
+    submit.setAttribute("class","some-form-button");
+    submit.setAttribute("id","form-button-submit");
+    var cancel = document.createElement("button");
+    cancel.textContent = "Cancel";
+    cancel.setAttribute("type","button");
+    cancel.setAttribute("onclick","cancelform()");
+    cancel.setAttribute("class","some-form-button");
+    var div_panelbot = document.createElement("div");
+    div_panelbot.setAttribute("class", "some-form-buttons-div");
+    div_panelbot.appendChild(cancel);
+    div_panelbot.appendChild(submit);
+    form.appendChild(paneltitle);
     form.appendChild(namelabel);
     form.appendChild(name);
     form.appendChild(div_panelbot);
@@ -220,10 +298,6 @@ function logsPet() {
         throw new Error(response.statusText);
     }).then((data) => {
         RefreshDashboard();
-        getlogs = document.getElementById("logscontent");
-        if (getlogs) {
-            getlogs.remove();
-        }
         var div = document.createElement("div");
         var title = document.createElement("p");
         div.setAttribute("id", "logscontent");
@@ -233,11 +307,11 @@ function logsPet() {
             var p = document.createElement("p");
             p.textContent = `[${data[i]['timestamp']}] ${data[i]['details']}`;
             div.appendChild(p);
-        }
+        }     
         setTimeout(function(){
             div.remove();
         }, 8000);
-        interactiondiv.after(div);     
+        interactiondiv.after(div);
     }).catch((error) => {
         console.log(error)
         RaiseOverview(error);
@@ -280,7 +354,7 @@ function RefreshDashboard() {
 
             petimage.src = "/static/images/" + data[0]["type"] + "0001.png";
 
-            button_list = ["view", "feed", "wash", "play", "pet", "logs", "abandon"]
+            button_list = ["talk", "play", "feed", "wash", "pet", "logs", "abandon"]
             for (let op = 0; op < button_list.length; op++) {
                 var button = document.createElement('button');
                 button.setAttribute("onclick",button_list[op] + "Pet()");

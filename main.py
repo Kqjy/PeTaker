@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_from_directory
 from deta import Deta
 from pet import Pet
 
@@ -52,6 +52,15 @@ def action_adopt():
         message = pet.adopt(type, name)
     else:
         message = "Provide the pet a name!"
+    return message
+
+@app.route('/actions/talk', methods=["POST"])
+@app.route('/actions/talk/', methods=["POST"])
+def action_talk():
+    getReq = request.data
+    getReq = json.loads(getReq)
+    text = getReq["text"]
+    message = pet.talk(text.lower())
     return message
 
 @app.route('/actions/view', methods=["POST"])
@@ -118,6 +127,17 @@ def metadata():
                 "path": "/actions/view"
             },
             {
+                "name": "talk", 
+                "title": "Talk to pet", 
+                "path": "/actions/talk",
+                "input": [
+                    {
+                        "name": "text",
+                        "type": "string"
+                    }
+                ]
+            },
+            {
                 "name": "feed", 
                 "title": "Feed your pet", 
                 "path": "/actions/feed"
@@ -162,3 +182,7 @@ def actions():
             logsdata.delete(i["key"])
         return "Cleared logs."
   return "Executed Action."
+
+@app.route('/manifest.json')
+def manifest():
+    return send_from_directory('static', 'manifest.json')

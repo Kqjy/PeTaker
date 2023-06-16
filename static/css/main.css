@@ -43,6 +43,11 @@ img {
 #petimage {
     border-radius: 8px;
 }
+#notification {
+    max-height: 100px;
+    overflow: hidden;
+    margin: 5px 0px;
+}
 #overview {
     margin: auto;
     max-width: 600px;
@@ -75,7 +80,7 @@ img {
 .headlessui {
     padding-bottom: 10%;
     position: relative; 
-    top:40%;
+    top: 30%;
 }
 .headlessui-back {
     top: 0;
@@ -114,6 +119,9 @@ img {
     width: 80%;
     height: 28px;
     margin: 4px auto 10px auto;
+}
+.some-form-buttons-div {
+    text-align: right;
 }
 .some-form-select {
     height: 34px;

@@ -1,0 +1,32 @@
+{
+    "dog": {
+        "hello": "Barks",
+        "i love you": "I love you too, human!",
+        "how are you": "I'm wagging my tail, thanks for asking!",
+        "tell a me joke": "Why don't skeletons fight each other? They don't have the guts!",
+        "favorite toy": "My favorite toy is a squeaky ball. It's so much fun!",
+        "favorite treat": "I can't resist a tasty, meaty treat!",
+        "dream": "In my dreams, I'm chasing squirrels in a never-ending park!",
+        "best friend": "You're my best friend, human!"
+    },
+    "cat": {
+        "hello": "Meows",
+        "i love you": "I tolerate your presence.",
+        "how are you": "I'm purrfectly content, thank you!",
+        "tell a me joke": "Why did the cat sit on the computer? To keep an eye on the mouse!",
+        "favorite toy": "I adore playing with a dangling feather toy. It's so much fun to pounce!",
+        "favorite treat": "I'm quite fond of fish-flavored treats. They're simply irresistible!",
+        "dream": "In my dreams, I'm lounging in a sunbeam, ruling over my kingdom.",
+        "best friend": "You're my loyal servant, human!"
+    },
+    "bird": {
+        "hello": "Chips",
+        "i love you": "I tweet you!",
+        "how are you": "I'm chirping happily, thanks for asking!",
+        "tell a me joke": "Why did the bird join a band? Because it had perfect pitch!",
+        "favorite toy": "I love swinging on a colorful perch and pecking at shiny bells!",
+        "favorite treat": "I go nuts for sunflower seeds. They're my absolute favorite!",
+        "dream": "In my dreams, I'm soaring high in the sky, exploring new horizons.",
+        "best friend": "You're my flock leader, human!"
+    }
+}

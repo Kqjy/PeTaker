@@ -4,6 +4,8 @@ from datetime import datetime
 from dateutil import tz
 import os
 import random
+import json
+import re
 
 deta = Deta(os.environ['DETA_PROJECT_KEY'])
 fernet = Fernet(os.environ['ENCRYPTION_KEY'])
@@ -12,6 +14,15 @@ playerdata = deta.Base('player')
 logsdata = deta.Base('logs')
 
 pets_type = ["dog", "cat", "bird"]
+
+def extract_number_range(input_text):
+    pattern = r"from (\d+) to (\d+)"
+    matches = re.search(pattern, input_text)
+    if matches:
+        start = int(matches.group(1))
+        end = int(matches.group(2))
+        return (start, end)
+    return None
 
 class Pet():
     def __init__(self):
@@ -52,14 +63,14 @@ class Pet():
                     level += 1
                     exp = 0
                 if difference > 300:
-                    hunger -= random.randint(0, min((difference // 500), hunger))
-                    hygiene -= random.randint(0, min((difference // 300), hygiene))
-                    fun -= random.randint(0, min((difference // 300), fun))
-                    love -= random.randint(0, min((difference // 300), love))
+                    hunger -= min((difference // 300), hunger)
+                    hygiene -= min((difference // 400), hygiene)
+                    fun -= min((difference // 500), fun)
+                    love -= min((difference // 600), love)
                     mood = int((hunger + hygiene + fun + love) / 4)
                 if difference > 86400:
                     mood = 0
-                if hunger <= 0 and hygiene <= 0 and fun <= 0 and love <= 0:
+                if difference > 172800 and hunger <= 0 and hygiene <= 0 and fun <= 0 and love <= 0:
                     self.abandon(fetchData[i]['name'])
                     self.logs(fetchData[i]['name'] + " ran away because it felt neglected.")
                     return fetchData[i]['name'] + " ran away because it felt neglected."
@@ -139,7 +150,7 @@ class Pet():
         if fetchData:
             key = fetchData[0]["key"]
             petsdata.delete(key)
-            self.logs("Abandoned " + name)
+            self.logs(f"Abandoned {name}.")
             return f"{name} has been abandoned :("
         else:
             return f"{name} not found."
@@ -228,6 +239,28 @@ class Pet():
         else:
             return "No pets found. Maybe try adopting one."
     
+    def talk(self, text: str):
+        fetchData = petsdata.fetch().items
+        if fetchData:
+            try:
+                text = text.replace("!", "").replace("?", "")
+                if "random number" in text:
+                    number_range = extract_number_range(text)
+                    if number_range:
+                        start, end = number_range
+                        num = random.randint(start, end)
+                        return f'{fetchData[0]["name"]} chooses {num}!'
+                    else:
+                        return f'{fetchData[0]["name"]} is confused with the numbers.'
+                f = open('response.json')
+                resp = json.load(f)
+                reply = resp[fetchData[0]["type"]][text] 
+                return f'{fetchData[0]["name"]}: {reply}'
+            except:
+                return f'{fetchData[0]["name"]} ignores you.'
+        else:
+            return "No pets to talk to. Maybe try adopting one."
+
     def logs(self, detail: str):
         local_timezone = tz.tzlocal()
         local_datetime = datetime.now(local_timezone)
