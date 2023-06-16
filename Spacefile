@@ -8,6 +8,8 @@ micros:
     primary: true
     dev: flask --app main --debug run -p 4201 
     provide_actions: true
+    public_routes:
+      - /static/manifest.json
     presets:
       env:
           - name: ENCRYPTION_KEY
